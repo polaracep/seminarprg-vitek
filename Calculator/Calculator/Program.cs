@@ -37,14 +37,14 @@ namespace Calculator
             double num3 = 0; //proměnné kterým uživatel může definovat hodnotu
             double methodCalled = 0;
             double result = 0;
-            bool wannaContinue = false; //kontrola zdali má program pokračovat
+            bool wannaContinue = true; //kontrola zdali má program pokračovat
             string hexValue;
             
             string userAnswer2;
             string userAnswer3 ="o";
             Console.WriteLine("swiching on.. press enter to continue");
             Console.ReadKey();
-            while (wannaContinue = true)
+            while (wannaContinue == true)
             {
                 if (userAnswer3 == "o")//podmínka podle které uživatel pokračuje s výsledkem z minulých operací nebo od začátku
                 {
@@ -159,7 +159,13 @@ namespace Calculator
                     }
                     else if (userDecision1 == "n")
                     {
-                        Console.Write("napiš jedno z čísel 1-5 pro výber jedné metody\n\n1) 2 na ntou\n2) odmocnění zadaného čísla\n3) sin\n4) cos\n5) převod na hexadecimalni soustavu \n\n");
+                        Console.Write("napiš jedno z čísel 1-5 pro výber jedné metody\n" +
+                            "\n1) 2 na ntou" +
+                            "\n2) odmocnění zadaného čísla" +
+                            "\n3) sin" +
+                            "\n4) cos" +
+                            "\n5) převod na hexadecimalni soustavu \n" +
+                            "\n");
                         methodCalled = Convert.ToInt32(Console.ReadLine());
                         switch (methodCalled)
                         {
