@@ -27,8 +27,8 @@ namespace lists_1_
             PrintList(favoriteFood);
             Console.WriteLine();
             
-            bool chcespokracovat = true;
-            while (chcespokracovat == true)
+            bool repeat = true;
+            while (repeat == true)
             {
                 Console.WriteLine("Chces neco pridat nebo odebrat?\n(add/rem) pokud ano\n(ne) pokud ne");
                 string userDecesion = Console.ReadLine();
@@ -37,7 +37,7 @@ namespace lists_1_
                 {
                     case "add":
                         Console.WriteLine("Na jakou pozici v listu a co chces pridat? (odpovědi rozděl mezerou)");
-                        userInput = Convert.ToString(Console.ReadLine());
+                        userInput = Console.ReadLine();
                         string[] arguments = userInput.Split(' ');
                         switch (favoriteFood.Contains(Convert.ToString(arguments[1])))
                         {
@@ -58,24 +58,23 @@ namespace lists_1_
                     case "rem":
                             Console.WriteLine("Co chces odebrat?");
                             userInput = Console.ReadLine();
-
-                            switch (favoriteFood.Contains(userInput))
+                            int foodNumber = favoriteFood.IndexOf(userInput);
+                            switch (foodNumber)
                             {
-                                case true:
-                                    int foodNumber = favoriteFood.IndexOf(userInput);
+                                case -1:
+                                    Console.WriteLine("tohle jídlo se v daném listě/listu nenachází");
+                                    break;
+                                default:
                                     favoriteFood.RemoveAt(foodNumber);
                                     Console.WriteLine();
                                     PrintList(favoriteFood);
-                                    break;
-                                case false:
-                                    Console.WriteLine("tohle jídlo se v daném listě/listu nenachází");
                                     break;
                                 
                             }        
                         
                         break;
                     case "ne": //stopuje cyklus
-                        chcespokracovat = false;
+                        repeat = false;
                         break;
                     default:
                         Console.WriteLine("wrong user input");
@@ -86,7 +85,7 @@ namespace lists_1_
                 }
                
                 Console.ReadKey();
-            
+                Console.Clear();
             }
            
         }

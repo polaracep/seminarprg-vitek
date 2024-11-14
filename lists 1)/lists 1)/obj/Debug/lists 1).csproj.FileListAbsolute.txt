@@ -5,3 +5,10 @@ C:\Users\vitek\source\repos\lists 1)\lists 1)\bin\Debug\lists 1).exe
 C:\Users\vitek\source\repos\lists 1)\lists 1)\bin\Debug\lists 1).pdb
 C:\Users\vitek\source\repos\lists 1)\lists 1)\obj\Debug\lists 1).exe
 C:\Users\vitek\source\repos\lists 1)\lists 1)\obj\Debug\lists 1).pdb
+C:\Users\vitek\source\Seminarprg_pc_home\lists 1)\lists 1)\obj\Debug\lists 1).csproj.AssemblyReference.cache
+C:\Users\vitek\source\Seminarprg_pc_home\lists 1)\lists 1)\obj\Debug\lists 1).csproj.CoreCompileInputs.cache
+C:\Users\vitek\source\Seminarprg_pc_home\lists 1)\lists 1)\obj\Debug\lists 1).exe
+C:\Users\vitek\source\Seminarprg_pc_home\lists 1)\lists 1)\obj\Debug\lists 1).pdb
+C:\Users\vitek\source\Seminarprg_pc_home\lists 1)\lists 1)\bin\Debug\lists 1).exe.config
+C:\Users\vitek\source\Seminarprg_pc_home\lists 1)\lists 1)\bin\Debug\lists 1).exe
+C:\Users\vitek\source\Seminarprg_pc_home\lists 1)\lists 1)\bin\Debug\lists 1).pdb
