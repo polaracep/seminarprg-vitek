@@ -72,6 +72,7 @@ namespace lists_1_
                                 
                             }        
                         
+
                         break;
                     case "ne": //stopuje cyklus
                         repeat = false;
