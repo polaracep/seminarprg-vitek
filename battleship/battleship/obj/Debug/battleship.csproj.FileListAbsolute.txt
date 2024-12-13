@@ -1,0 +1,7 @@
+C:\Users\vitek\source\repos\battleship\battleship\bin\Debug\battleship.exe.config
+C:\Users\vitek\source\repos\battleship\battleship\bin\Debug\battleship.exe
+C:\Users\vitek\source\repos\battleship\battleship\bin\Debug\battleship.pdb
+C:\Users\vitek\source\repos\battleship\battleship\obj\Debug\battleship.csproj.AssemblyReference.cache
+C:\Users\vitek\source\repos\battleship\battleship\obj\Debug\battleship.csproj.CoreCompileInputs.cache
+C:\Users\vitek\source\repos\battleship\battleship\obj\Debug\battleship.exe
+C:\Users\vitek\source\repos\battleship\battleship\obj\Debug\battleship.pdb
