@@ -1,7 +1,0 @@
-C:\Users\vitek\source\Seminarprg_pc_home\battleships2.0\battleships2.0\bin\Debug\battleships2.0.exe.config
-C:\Users\vitek\source\Seminarprg_pc_home\battleships2.0\battleships2.0\bin\Debug\battleships2.0.exe
-C:\Users\vitek\source\Seminarprg_pc_home\battleships2.0\battleships2.0\bin\Debug\battleships2.0.pdb
-C:\Users\vitek\source\Seminarprg_pc_home\battleships2.0\battleships2.0\obj\Debug\battleships2.0.csproj.AssemblyReference.cache
-C:\Users\vitek\source\Seminarprg_pc_home\battleships2.0\battleships2.0\obj\Debug\battleships2.0.csproj.CoreCompileInputs.cache
-C:\Users\vitek\source\Seminarprg_pc_home\battleships2.0\battleships2.0\obj\Debug\battleships2.0.exe
-C:\Users\vitek\source\Seminarprg_pc_home\battleships2.0\battleships2.0\obj\Debug\battleships2.0.pdb
