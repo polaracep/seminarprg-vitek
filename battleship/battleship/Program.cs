@@ -16,6 +16,53 @@ namespace Battleships
         static List<string> usedShipsP = new List<string>();
         static List<int> usedShipsC = new List<int>();
         static int[] computerLastShotCoords = new int[2];
+        static List<int[]> preferedTiles = new List<int[]>();
+        static int scanner = 1;
+        static void Scanner(int[,] arrayBeingScanned, int[] coordinates)
+        {
+            Console.Write("  1 2 3 4 5 6 7 8 9 10\n");
+
+            for (int i = 0; i < arrayBeingScanned.GetLength(0); i++)
+            {
+                Console.Write((char)(i + 65) + " ");
+
+                for (int j = 0; j < arrayBeingScanned.GetLength(1); j++)
+                {
+
+                    if (i >= coordinates[0] - 1 && i <= coordinates[0] + 1 && j >= coordinates[1] - 1 && j <= coordinates[1] + 1)
+                        
+                    {
+                        if (arrayBeingScanned[i, j] == 1)
+                        {
+                            Console.Write("l ");
+                        }
+                        else
+                        {
+                            Console.Write("  ");
+                        }
+                    }
+                    else
+                    {
+                        switch (arrayBeingScanned[i, j])
+                        {
+                            case 0:
+                                Console.Write("■ ");
+                                break;
+                            case 1:
+                                Console.Write("■ ");
+                                break;
+                            case 2:
+                                Console.Write("M ");
+                                break;
+                            case 3:
+                                Console.Write("X ");
+                                break;
+                        }
+                    }
+                }
+                Console.Write("\n");
+            }
+        }
 
         static void SetArrayToDefault(int[,] array2D)
         {
@@ -43,62 +90,49 @@ namespace Battleships
             }
             if (shipTileCount > 0) { return true; }
             else { return false; }
-        }//
-        static int[] GetCoordinates(string coordinates)
+        }
+        static bool ValidCoordinates (string coordinates)
         {
-            char columnLetter;
-            char rowNumber;
-            while (true)
+            if (coordinates.Length < 2 && coordinates.Length > 3)
             {
-                if (coordinates.Length < 2)
-                {
-                    Console.WriteLine("please enter full coordinates\n");
-                    coordinates = Console.ReadLine().ToUpper();
-                    columnLetter = coordinates[0];
-                    rowNumber = coordinates[1];
-                }
-                else
-                {
-                    break;
-                }
+                Console.WriteLine("invalid input, please repeat coordinates");
+                return false;
             }
-                
-            int[] output = new int[2];
-            int x;
-            int y;
+            if (coordinates[0] < 'A' || coordinates[0] > 'J')
+            {
+                return false;
+            }
+            for(int i = 1; i < coordinates.Length; i++)
+            {
+                if (coordinates[i] < '0' && coordinates[i] > '9')
+                {
+                    return false;
+                }    
+            }
+            return true;
+        }
+        static int[] GetCoordinates(string coordinates)
+        {
             coordinates = coordinates.ToUpper();
-            columnLetter = coordinates[0];
-            rowNumber = coordinates[1];
-            while (true)
+            int[] output = new int[2];
+            int x = 0, y = 0;
+            while (ValidCoordinates(coordinates) == false)
             {
-                if (coordinates.Length != 2 || columnLetter < 'A' || columnLetter > 'J' || rowNumber < '1' || rowNumber > '9')
-                {
-                    if (coordinates.Length == 3 && (columnLetter < 'A' || columnLetter > 'J'))
-                    {
-                        rowNumber = coordinates[1];
-                        char secondRowNumber = coordinates[2];
-                        if (secondRowNumber == 0 && rowNumber == 1)
-                        {
-                            x = columnLetter - 'A' + 1;
-                            y = 10;
-                            output[0] = x - 1;
-                            output[1] = y - 1;
-                            return output;
-                        }
-                        else { }
-                    }
-                    Console.WriteLine("Invalid input, please try again\n");
-                    coordinates = Console.ReadLine().ToUpper();
-                    columnLetter = coordinates[0];
-                    rowNumber = coordinates[1];
-                }
-                else
-                {
-                    break;
-                }
+                Console.WriteLine("invalid input, please repeat coordinates");
+                coordinates = Console.ReadLine().ToUpper();
             }
-            x = columnLetter - 'A' + 1;
-            y = int.Parse(rowNumber.ToString());
+            switch (coordinates.Length)
+            {
+                case 2:
+                    x = coordinates[0] - 'A' + 1;
+                    y = int.Parse(coordinates[1].ToString());
+                    break;
+                case 3:
+                    x = coordinates[0] - 'A' + 1;
+                    y = int.Parse(coordinates[1].ToString() + coordinates[2].ToString());;
+                    break;
+            }
+            
             output[0] = x - 1;
             output[1] = y - 1;
             return output;
@@ -293,45 +327,6 @@ namespace Battleships
         }
         static bool CheckShipPlacementAvailability(int[,] battleField, int[] coordinates, string vh, int l)
         {
-            /*bool available = true;
-            for (int i = 0; i < l; i++)
-            {
-                switch (vh)
-                {
-                    case "v":
-                        if (battleField[coordinates[0] + i, coordinates[1]] == 0 && (coordinates[0] + l) < 11)
-                        {
-                            for (int j = 0; j < 3; j++)
-                            {
-                                if (battleField[coordinates[0] + i, coordinates[1] - 1 + j] == 0 )
-                                {
-                                    available = true;
-                                }
-                                else { return false; }
-                            }  
-                        }
-                        else { return false; }
-                        break;
-                    case "h":
-                        if (battleField[coordinates[0], coordinates[1] + i] == 0 && (coordinates[1] + l) < 11)
-                        {
-                            for (int j = 0; j < 3; j++)
-                            {
-                                if (battleField[coordinates[0] + j - 1, coordinates[1] + i] == 0)
-                                {
-                                    available = true;
-                                }
-                                else { return false; }
-                            }
-                        }
-                        else { return false; }
-                        break;
-                    default:
-                        return false;
-                }
-            }
-            return available;*/
-           
             bool available = true;
             if (vh == "v")
             {
@@ -426,20 +421,20 @@ namespace Battleships
             computerLastShotCoords[0] = x; computerLastShotCoords[1] = y;
             if (arrayToChange[computerLastShotCoords[0], computerLastShotCoords[1]] == 3)
             {
-                arrayToChange[computerLastShotCoords[0] + 1, computerLastShotCoords[1]] = GetBattleFieldTargetState(arrayToChange, computerLastShotCoords[0], computerLastShotCoords[1]);
+                arrayToChange[computerLastShotCoords[0], computerLastShotCoords[1]] = GetBattleFieldTargetState(arrayToChange, computerLastShotCoords[0], computerLastShotCoords[1]);
                 return arrayToChange;
             }
             else
             {
                 x = rng.Next(0, 10);
                 y = rng.Next(0, 10);
-                int computerChoice = rng.Next(1, 101);
+                int computerChoice = rng.Next(1, 51);
                 switch (computerChoice)
                 {
                     default:
                         arrayToChange[x, y] = GetBattleFieldTargetState(arrayToChange, x, y);
                         return arrayToChange;
-                    case 2:
+                    case 1:
                         x = rng.Next(1, 9);
                         y = rng.Next(1, 9);
                         for (int i = 0; i < 3; i++)
@@ -450,21 +445,21 @@ namespace Battleships
                             }
                         }
                         return arrayToChange;
-                    case 3:
+                    case 2:
                         x = rng.Next(1, 9);
                         for (int i = 0; i < 3; i++)
                         {
                             arrayToChange[x + i - 1, y] = GetBattleFieldTargetState(arrayToChange, x + i - 1, y);
                         }
                         return arrayToChange;
-                    case 4:
+                    case 3:
                         y = rng.Next(1, 9);
                         for (int j = 0; j < 3; j++)
                         {
                             arrayToChange[x, y + j - 1] = GetBattleFieldTargetState(arrayToChange, x, y + j - 1);
                         }
                         return arrayToChange;
-                    case 1:
+                    case 4:
                         for (int i = 0; i < 5; i++)
                         {
                             arrayToChange[x, y] = GetBattleFieldTargetState(arrayToChange, x, y);
@@ -479,141 +474,212 @@ namespace Battleships
         {
             bool validTarget = false;
             string userInput2;
+            string userInput = "shoot";
 
-            while (true)
+            
+            if(scanner > 0)
             {
-                Console.WriteLine("Choose with which ammo will you shoot \n\nn for normal (remaining shots: >9999)\nb for bomb (remaining shots :" + bomb + ")\nw for wideshot (remaining shots :" + wideShot + ")\nl for longshot (remaining shots :" + longShot + ")\na for airstrike (remaining shots :" + airStrike + ")");
-                string userInput = Console.ReadLine().ToLower();
-                int[] coordinates = new int[2];
-
-                if ((userInput == "n" || userInput == "b" || userInput == "w" || userInput == "l") && GetAmmoCount(userInput) > 0)
+                Console.WriteLine("player's turn : choose wether you want to user scanner or shoot (scan/shoot)\n");
+                userInput = Console.ReadLine().ToLower();
+            }         
+            while (true)
+            {  
+                if(userInput == "scan")
                 {
-
+                    scanner--;
+                    int[] coordinates = new int[2];
+                    Console.WriteLine("Choose where do you want to scan");
+                    userInput2 = Console.ReadLine();
+                    coordinates = GetCoordinates(userInput2);
+                    Scanner(arrayToChange, coordinates);
+                    Console.ReadKey();
+                    return arrayToChange;
+                    
+                }
+                else if (userInput == "shoot")
+                {
                     while (true)
                     {
-                        Console.WriteLine("Choose where do you want to shoot");
-                        userInput2 = Console.ReadLine();
-                        coordinates = GetCoordinates(userInput2);
-                        switch (userInput)
-                        {
-                            case "b": if (coordinates[0] < 9 && coordinates[0] > 1 && coordinates[1] < 9 && coordinates[1] > 0) { validTarget = true; } else { validTarget = false; } break;
-                            case "l": if (coordinates[0] < 9 && coordinates[0] > 1) { validTarget = true; } else { validTarget = false; } break;
-                            case "w": if (coordinates[1] < 9 && coordinates[1] > 1) { validTarget = true; } else { validTarget = false; } break;
-                            default: break;
-                        }
-                        if (arrayToChange[coordinates[0], coordinates[1]] == 3 || arrayToChange[coordinates[0], coordinates[1]] == 2 || validTarget == false)
-                        {
-                            Console.WriteLine("you either have already shot at this place, or you cannot shoot here with this kind of ammo");
-                        }
-                        else { break; }
-                       
-                    }
-                    switch (userInput)
-                    {
-                        case "n":
+                        Console.WriteLine("Choose with which ammo will you shoot \n\nn for normal (remaining shots: >9999)\nb for bomb (remaining shots :" + bomb + ")\nw for wideshot (remaining shots :" + wideShot + ")\nl for longshot (remaining shots :" + longShot + ")\na for airstrike (remaining shots :" + airStrike + ")");
+                        userInput = Console.ReadLine().ToLower();
+                        int[] coordinates = new int[2];
 
-                            arrayToChange[coordinates[0], coordinates[1]] = GetBattleFieldTargetState(arrayToChange, coordinates[0], coordinates[1]);
-                            return arrayToChange;
-                        case "b":
-                            coordinates = GetCoordinates(userInput2);
-                            for (int i = 0; i < 3; i++)
+                        if ((userInput == "n" || userInput == "b" || userInput == "w" || userInput == "l") && GetAmmoCount(userInput) > 0)
+                        {
+                            while (true)
                             {
-                                for (int j = 0; j < 3; j++)
+                                Console.WriteLine("Choose where do you want to shoot");
+                                userInput2 = Console.ReadLine();
+                                coordinates = GetCoordinates(userInput2);
+                                switch (userInput)
                                 {
-                                    arrayToChange[coordinates[0] + i - 1, coordinates[1] + j - 1] = GetBattleFieldTargetState(arrayToChange, coordinates[0] + i - 1, coordinates[1] + j - 1);
+                                    case "b": if (coordinates[0] < 9 && coordinates[0] > 1 && coordinates[1] < 9 && coordinates[1] > 0) { validTarget = true; } else { validTarget = false; } break;
+                                    case "l": if (coordinates[0] < 9 && coordinates[0] > 1) { validTarget = true; } else { validTarget = false; } break;
+                                    case "w": if (coordinates[1] < 9 && coordinates[1] > 1) { validTarget = true; } else { validTarget = false; } break;
+                                    default: validTarget = true; break;
                                 }
+                                if (arrayToChange[coordinates[0], coordinates[1]] == 3 || arrayToChange[coordinates[0], coordinates[1]] == 2 || validTarget == false)
+                                {
+                                    Console.WriteLine("you either have already shot at this place, or you cannot shoot here with this kind of ammo");
+                                }
+                                else { break; }
+
                             }
-                            bomb--;
-                            return arrayToChange;
-                        case "l":
-                            coordinates = GetCoordinates(userInput2);
-                            for (int i = 0; i < 3; i++)
+                            switch (userInput)
                             {
-                                arrayToChange[coordinates[0] + i - 1, coordinates[1]] = GetBattleFieldTargetState(arrayToChange, coordinates[0] + i - 1, coordinates[1]);
+                                case "n":
+
+                                    arrayToChange[coordinates[0], coordinates[1]] = GetBattleFieldTargetState(arrayToChange, coordinates[0], coordinates[1]);
+                                    return arrayToChange;
+                                case "b":
+                                    coordinates = GetCoordinates(userInput2);
+                                    for (int i = 0; i < 3; i++)
+                                    {
+                                        for (int j = 0; j < 3; j++)
+                                        {
+                                            arrayToChange[coordinates[0] + i - 1, coordinates[1] + j - 1] = GetBattleFieldTargetState(arrayToChange, coordinates[0] + i - 1, coordinates[1] + j - 1);
+                                        }
+                                    }
+                                    bomb--;
+                                    return arrayToChange;
+                                case "l":
+                                    coordinates = GetCoordinates(userInput2);
+                                    for (int i = 0; i < 3; i++)
+                                    {
+                                        arrayToChange[coordinates[0] + i - 1, coordinates[1]] = GetBattleFieldTargetState(arrayToChange, coordinates[0] + i - 1, coordinates[1]);
+                                    }
+                                    longShot--;
+                                    return arrayToChange;
+                                case "w":
+                                    coordinates = GetCoordinates(userInput2);
+                                    for (int j = 0; j < 3; j++)
+                                    {
+                                        arrayToChange[coordinates[0], coordinates[1] + j - 1] = GetBattleFieldTargetState(arrayToChange, coordinates[0], coordinates[1] + j - 1);
+                                    }
+                                    wideShot--;
+                                    return arrayToChange;
                             }
-                            longShot--;
-                            return arrayToChange;
-                        case "w":
-                            coordinates = GetCoordinates(userInput2);
-                            for (int j = 0; j < 3; j++)
+                        }
+
+
+
+                        else if (userInput == "a" && GetAmmoCount(userInput) > 0)
+                        {
+                            Random rng = new Random();
+                            for (int i = 0; i < 5; i++)
                             {
-                                arrayToChange[coordinates[0], coordinates[1] + j - 1] = GetBattleFieldTargetState(arrayToChange, coordinates[0], coordinates[1] + j - 1);
+                                int randomX = rng.Next(0, 10);
+                                int randomY = rng.Next(0, 10);
+                                arrayToChange[randomX, randomY] = GetBattleFieldTargetState(arrayToChange, randomX, randomY);
                             }
-                            wideShot--;
+                            airStrike--;
                             return arrayToChange;
+                        }
+                        else
+                        {
+                            if (userInput != "a" && userInput != "n" && userInput != "b" && userInput != "l" && userInput != "w")
+                            {
+                                Console.WriteLine("Wrong user input");
+                            }
+                            else { Console.WriteLine("not enogh ammo"); }
+                        }
                     }
-                }
 
-
-
-                else if (userInput == "a" && GetAmmoCount(userInput) > 0)
-                {
-                    Random rng = new Random();
-                    for (int i = 0; i < 5; i++)
-                    {
-                        int randomX = rng.Next(0, 10);
-                        int randomY = rng.Next(0, 10);
-                        arrayToChange[randomX, randomY] = GetBattleFieldTargetState(arrayToChange, randomX, randomY);
-                    }
-                    airStrike--;
-                    return arrayToChange;
                 }
                 else
                 {
-                    if (userInput != "a" && userInput != "n" && userInput != "b" && userInput != "l" && userInput != "w")
-                    {
-                        Console.WriteLine("Wrong user input");
-                    }
-                    else { Console.WriteLine("not enogh ammo"); }
+                    Console.WriteLine("wrong user Input");
                 }
-
             }
         } 
 
         static void Main(string[] args)
         {
+            bool playAgain = true;
+            int turn = 0;
             int[,] playerBattlefield = new int[10, 10];
             int[,] computerBattlefield = new int[10, 10];
-            SetArrayToDefault(computerBattlefield);
-            SetArrayToDefault(playerBattlefield);
+            while(playAgain == true)
+            {
+                SetArrayToDefault(computerBattlefield);
+                SetArrayToDefault(playerBattlefield);
 
 
-            Console.WriteLine("!!Welcome Player!!\n\n\nTime to place your ships");
-            for (int i = 0; i < 5; i++)
-            {
-                Print2DArray(playerBattlefield);
-                playerBattlefield = PlayerShipPlacement(playerBattlefield, i);
-                Console.Clear();
-            }
-            Print2DArray(playerBattlefield);
-            Console.ReadKey();
-            Console.WriteLine("now its time for computer to place it's ship");
-            for (int i = 0; i < 5; i++)
-            {
-                computerBattlefield = ComputerShipPlacement(computerBattlefield, i);
-            }
-            Print2DArray(computerBattlefield);
-            Console.ReadKey();
-            Console.WriteLine("now it is time to fight");
-            while (true/*CheckIfThereAreShipsRemaining(computerBattlefield) == true && CheckIfThereAreShipsRemaining(playerBattlefield) == true*/)
-            {
-                Console.Clear();
-                PlayerMove(computerBattlefield);
-                Console.WriteLine("computer battlefield:\n");
-                Print2DArrayWithoutShips(computerBattlefield);
-                ComputerMove(playerBattlefield);
-                Console.WriteLine("\n\n player battlefield:\n");
+                Console.WriteLine("!!Welcome Player!!\n\n\nTime to place your ships");
+                for (int i = 0; i < 5; i++)// placing ships for player
+                {
+                    Print2DArray(playerBattlefield);
+                    playerBattlefield = PlayerShipPlacement(playerBattlefield, i);
+                    Console.Clear();
+                }
                 Print2DArray(playerBattlefield);
                 Console.ReadKey();
+                Console.WriteLine("now its time for computer to place it's ship");
+                Console.ReadKey();
+                for (int i = 0; i < 5; i++)// placing ships for computer
+                {
+                    computerBattlefield = ComputerShipPlacement(computerBattlefield, i);
+                    Console.Clear();
+                }
+
+                Console.WriteLine("now it is time to fight");
+                Console.ReadKey();
+                while (CheckIfThereAreShipsRemaining(computerBattlefield) == true && CheckIfThereAreShipsRemaining(playerBattlefield) == true)
+                {
+                    Console.Clear();
+                    PlayerMove(computerBattlefield);
+                    Console.WriteLine("computer battlefield:\n");
+                    Print2DArrayWithoutShips(computerBattlefield);
+                    ComputerMove(playerBattlefield);
+                    Console.WriteLine("\n\n player battlefield:\n");
+                    Print2DArray(playerBattlefield);
+                    Console.ReadKey();
+                    turn++;
+                    if (turn % 30 == 0)// given player the ability to scan every 30 turns
+                    {
+                        scanner++;
+                    }
+                }
+                if (CheckIfThereAreShipsRemaining(computerBattlefield) == false)
+                {
+                    while (true)
+                    {
+                        Console.WriteLine("\n\nVAMOOS, well played, do you want to play again (y/n)");
+                        string userInput = Console.ReadLine();
+                        if (userInput == "y")
+                        {
+                            Console.WriteLine("vamos");
+                            playAgain = true;
+                        }
+                        else if (userInput == "n")
+                        {
+                            Console.WriteLine("see you next time");
+                        }
+                        else { Console.WriteLine("wrong user input"); }
+                    }
+                    
+                }
+                else
+                {
+                    
+                    while (true)
+                    {
+                        Console.WriteLine("GG WP, better luck next time, do you want to play again (y/n)");
+                        string userInput = Console.ReadLine();
+                        if (userInput == "y")
+                        {
+                            Console.WriteLine("vamos");
+                            playAgain = true;
+                        }
+                        else if (userInput == "n")
+                        {
+                            Console.WriteLine("see you next time");
+                        }
+                        else { Console.WriteLine("wrong user input"); }
+                    }
+                }
             }
-            if (CheckIfThereAreShipsRemaining(computerBattlefield) == false)
-            {
-                Console.WriteLine("VAMOOS");
-            }
-            else
-            {
-                Console.WriteLine("GG WP, better luck next time");
-            }
+           
             Console.ReadKey();
         }
     }
