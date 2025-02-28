@@ -1,0 +1,14 @@
+C:\Users\vitek\Desktop\programator_wanna_be\Calculator\Calculator\bin\Debug\Calculator.exe.config
+C:\Users\vitek\Desktop\programator_wanna_be\Calculator\Calculator\bin\Debug\Calculator.exe
+C:\Users\vitek\Desktop\programator_wanna_be\Calculator\Calculator\bin\Debug\Calculator.pdb
+C:\Users\vitek\Desktop\programator_wanna_be\Calculator\Calculator\obj\Debug\Calculator.csproj.AssemblyReference.cache
+C:\Users\vitek\Desktop\programator_wanna_be\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
+C:\Users\vitek\Desktop\programator_wanna_be\Calculator\Calculator\obj\Debug\Calculator.exe
+C:\Users\vitek\Desktop\programator_wanna_be\Calculator\Calculator\obj\Debug\Calculator.pdb
+C:\Users\vitek\source\Seminarprg_pc_home\Calculator\Calculator\bin\Debug\Calculator.exe.config
+C:\Users\vitek\source\Seminarprg_pc_home\Calculator\Calculator\bin\Debug\Calculator.exe
+C:\Users\vitek\source\Seminarprg_pc_home\Calculator\Calculator\bin\Debug\Calculator.pdb
+C:\Users\vitek\source\Seminarprg_pc_home\Calculator\Calculator\obj\Debug\Calculator.csproj.AssemblyReference.cache
+C:\Users\vitek\source\Seminarprg_pc_home\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
+C:\Users\vitek\source\Seminarprg_pc_home\Calculator\Calculator\obj\Debug\Calculator.exe
+C:\Users\vitek\source\Seminarprg_pc_home\Calculator\Calculator\obj\Debug\Calculator.pdb

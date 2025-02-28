@@ -1,0 +1,7 @@
+C:\Users\vitek\source\Seminarprg_pc_home\Merge search\Merge search\bin\Debug\Merge search.exe.config
+C:\Users\vitek\source\Seminarprg_pc_home\Merge search\Merge search\bin\Debug\Merge search.exe
+C:\Users\vitek\source\Seminarprg_pc_home\Merge search\Merge search\bin\Debug\Merge search.pdb
+C:\Users\vitek\source\Seminarprg_pc_home\Merge search\Merge search\obj\Debug\Merge search.csproj.AssemblyReference.cache
+C:\Users\vitek\source\Seminarprg_pc_home\Merge search\Merge search\obj\Debug\Merge search.csproj.CoreCompileInputs.cache
+C:\Users\vitek\source\Seminarprg_pc_home\Merge search\Merge search\obj\Debug\Merge search.exe
+C:\Users\vitek\source\Seminarprg_pc_home\Merge search\Merge search\obj\Debug\Merge search.pdb
