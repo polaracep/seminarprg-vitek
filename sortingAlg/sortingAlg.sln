@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sortingAlg", "sortingAlg\sortingAlg.csproj", "{A835D9BB-7780-4D83-8A04-A3B59C7C5449}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A835D9BB-7780-4D83-8A04-A3B59C7C5449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A835D9BB-7780-4D83-8A04-A3B59C7C5449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A835D9BB-7780-4D83-8A04-A3B59C7C5449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A835D9BB-7780-4D83-8A04-A3B59C7C5449}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4149B26B-6DA4-460E-840A-69F56718E057}
+	EndGlobalSection
+EndGlobal
