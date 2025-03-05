@@ -45,7 +45,7 @@ namespace Firstgame
             Console.WriteLine("\nThank you for playing! Goodbye.");
         }
 
-        private static void PlayBlackjack(player)
+        private static void PlayBlackjack(player player)
         {
             blackjack blackjackGame = new blackjack(player);
             blackjackGame.DealInitialCards();
@@ -59,7 +59,7 @@ namespace Firstgame
                 if (keyInfo.Key == ConsoleKey.Enter)
                 {
                     blackjackGame.PlayerHit();
-                    if (player.Calculate() > 21)
+                    if (player.CalculatehandValueBlackjack() > 21)
                     {
                         Console.WriteLine("\nYou busted!");
                         playerTurn = false;
@@ -80,7 +80,7 @@ namespace Firstgame
             blackjackGame.DeterminewhoWon();
         }
 
-        
+
     }
-    
+
 }

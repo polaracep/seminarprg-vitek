@@ -52,7 +52,7 @@ namespace Firstgame
             }
 
             Console.WriteLine("Dealer's hand:");
-            foreach (int card in dealerHand)
+            foreach (var card in dealerHand)
             {
                 Console.WriteLine(card);
             }
@@ -62,10 +62,10 @@ namespace Firstgame
             int totalValue = 0;
             int aceCount = 0;
 
-            foreach (int card in hand)
+            foreach (var card in hand)
             {
-                totalValue += card;
-                if (card. == "A") aceCount++;
+                totalValue += card.cardValue;
+                if (card.cardSuit == "A") aceCount++;
             }
             while (totalValue > 21 && aceCount > 0)
             {
@@ -104,7 +104,7 @@ namespace Firstgame
             else
             {
                 Console.WriteLine("draw");
-            } 
+            }
         }
 
         public bool PlaceBet(int amount)
